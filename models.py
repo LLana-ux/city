@@ -69,3 +69,16 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name.title()
+
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
+
+class MyView(PermissionRequiredMixin, View):
+    permission_required = ('<app>.<action>_<model>',
+                           '<app>.<action>_<model>')
+
+from django.views.generic.edit import CreateView
+
+class AddProduct(PermissionRequiredMixin, CreateView):
+    permission_required = ('shop.add_product', )
+ 
